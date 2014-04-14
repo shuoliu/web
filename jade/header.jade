@@ -1,0 +1,31 @@
+﻿header.navbar.navbar-static-top
+	.container
+		.navbar-brand.collapse.navbar-collapse {{body.text.h_welcome}}
+		nav
+			ul.nav.navbar-nav.navbar-right.list-inline.collapse.navbar-collapse
+				li
+					ul.nav.navbar-nav.list-inline
+						li.btn-link(ng-hide='body.isLogin',ng-click='body.pressLogin=true') {{body.text.h_login}}
+						li(ng-show='body.isLogin') {{body.text.h_isLogin + body.User.username}}
+						li.btn-link(ng-show='body.isLogin',ng-click='logout()') {{body.text.h_logout}}
+				li
+					ul.nav.navbar-nav.list-inline
+						li
+							label {{body.text.h_language}}
+						li
+							img.lang(src='res/cnflag.jpg',alt='中文',ng-click='setLang("cn")')
+						li
+							img.lang(src='res/usflag.jpg',alt='En',ng-click='setLang("en")')
+	.fixedLayer#opacityLayer(ng-show='body.pressLogin')
+	.fixedLayer#winLogin(ng-show='body.pressLogin',ng-controller='ctrlLogin')
+		button.btn.btn-default.pull-right(ng-click='close()')
+			span.glyphicon.glyphicon-remove
+		#form-container
+			form(name='fmLogin')
+				.form-group
+					label {{body.text.l_user}}
+					input.form-control(name='username',ng-model='user.username',ng-maxlength='20',required)
+					label {{body.text.l_password}}
+					input.form-control(name='password',type='password',ng-model='user.password',ng-minlength='4',ng-maxlength='20',required)
+					span.help-block {{body.text.l_help}}
+					button.btn.btn-primary.pull-right(ng-click='login()') {{body.text.l_login}}
