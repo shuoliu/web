@@ -1,22 +1,33 @@
 ﻿header.navbar.navbar-fixed-top
 	.container
-		.navbar-brand.collapse.navbar-collapse 
+		.navbar-brand.collapse.navbar-collapse
 			a.text-black(href='/') {{body.text.h_welcome}}
-		nav
-			ul.nav.navbar-nav.navbar-right.list-inline.collapse.navbar-collapse
+		div
+			mixin menu()
 				li
-					ul.nav.navbar-nav.list-inline
-						li.btn-link(ng-hide='body.isLogin',ng-click='body.pressLogin=true') {{body.text.h_login}}
-						li(ng-show='body.isLogin') {{body.text.h_isLogin + body.User.username}}
-						li.btn-link(ng-show='body.isLogin',ng-click='logout()') {{body.text.h_logout}}
+					a.text-black(href='/') {{body.text.h_home}}
 				li
-					ul.nav.navbar-nav.list-inline
-						li
-							label {{body.text.h_language}}
-						li
-							img.lang(src='res/cnflag.jpg',alt='中文',ng-click='setLang("cn")')
-						li
-							img.lang(src='res/usflag.jpg',alt='En',ng-click='setLang("en")')
+					a.text-black(href='/resume') {{body.text.h_resume}}
+				li
+					a.text-black(href='#') {{body.text.h_tools}}
+				li
+					a.text-black(href='#') {{body.text.h_news}}
+			a.navbar-toggle.text-black.emerge(data-toggle='dropdown', data-target='#', href)
+				span.glyphicon.glyphicon-align-justify
+			ul.dropdown-menu(aria-labelledby="dLabel")
+				+menu()
+			ul.nav.navbar-nav.list-inline.collapse.navbar-collapse
+				+menu()
+			ul.navbar-nav.navbar-right.list-inline(style="margin-top:15px")
+				li.btn-link(ng-hide='body.isLogin',ng-click='body.pressLogin=true') {{body.text.h_login}}
+				li(ng-show='body.isLogin') {{body.text.h_isLogin + body.User.username}}
+				li.btn-link(ng-show='body.isLogin',ng-click='logout()') {{body.text.h_logout}}
+				li
+					label.collapse.navbar-collapse {{body.text.h_language}}
+				li
+					img.lang(src='res/cnflag.jpg',alt='中文',ng-click='setLang("cn")')
+				li
+					img.lang(src='res/usflag.jpg',alt='En',ng-click='setLang("en")')
 	.fixedLayer#opacityLayer(ng-show='body.pressLogin')
 	.fixedLayer#winLogin(ng-show='body.pressLogin',ng-controller='ctrlLogin')
 		button.btn.btn-default.pull-right(ng-click='close()')

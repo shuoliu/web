@@ -65,11 +65,28 @@ input.ng-invalid.ng-dirty {
 	position:static;
 }
 
-@media (min-width: 765px) {
-.sidebar{
-	width:163px;
-	position:fixed;
+.emerge {
+	float:left;
 }
+
+@media (min-width: 768px) {
+	.sidebar{
+		width:163px;
+		position:fixed;
+	}
+	
+	.emerge {
+		display:none;
+	}
+}
+
+.navbar-right {
+	float: right !important;
+}
+
+.navbar-toggle  {
+	margin-top:5px;
+	margin-bottom:5px;
 }
 
 @media (min-width: 992px) {
