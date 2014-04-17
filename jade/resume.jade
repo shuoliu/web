@@ -1,0 +1,52 @@
+doctype html
+html#ng-app(lang="zh-cn",xmlns:ng="http://angularjs.org",ng-app='ngApp')
+	head
+		title Resume - Welcome to Shuo's site
+		//script(src='/js/jquery-1.11.0.min.js')
+		//script(src='/js/bootstrap.min.js')
+		include head
+		script(src='/ng/resume.js')
+		style(type='text/css')
+			|#mainBody{margin-top:38px; max-width:760px}
+			|.resume-items{margin-left:20px}
+			|.resume-item > li{margin-bottom:35px}
+			|.row-padding{padding-left:10px}
+			|.category{margin-top:50px}
+			|.anchor{display: block; position: relative; top: -98px;}
+	body(data-spy="scroll" data-target=".sidebar", ng-controller='ctrlMain')
+		include header
+		.container(ng-controller='ctrlResume')
+			.row
+				.col-sm-3
+					.affix.sidebar
+						ul.sidebar-nav.nav
+							each c in cat
+								li
+									a(href ng-click="scrollTo('#{c}')")= c
+				mixin detail(content)
+					ul.dull-list.resume-item
+						each c in content
+							li
+								h4= c.title
+								label= c.company
+								span.row-padding #{c.starts} - #{c.ends}
+								if(c.techs)
+									h5 TECHS: #{c.techs}
+								ul
+									each d in c.desc
+										if(d)
+											li= d								
+					
+				.col-sm-9#mainBody
+					h2 Shuo Liu
+					each c in cat
+						.category
+							.anchor(id=c)
+							h3= c
+							if(c == 'Expertises')
+								ul
+									each i in rsm[c]
+										li= i
+							else
+								.resume-items
+									+detail(rsm[c])

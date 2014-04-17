@@ -2,7 +2,8 @@ var http = require('http')
 	, jade = require('jade')
 	, express = require('express')
 	, app = express()
-	, authen = require('./util/authen.js');
+	, authen = require('./util/authen.js')
+	, resumeDB = require('./util/db_resume.js');
 
 app.routeTable = {};
 	
@@ -32,6 +33,24 @@ app.post('/login', function(req, res){
 app.get('/logout', function(req, res){
 	authen.logout(req, res);
 });
+
+app.get('/resume', function(req, res){
+	resumeDB.sendResume(function(docs){
+		//to keep in this order
+		var cates = ["Education", "Expertises", "Professional Experiences", "Projects"];
+		var resume = {"test":"test1","Education":"", "Expertises":"", "Professional Experiences":"", "Projects":""};
+		for(var i = 0; i < docs.length; i ++) {
+			var c = docs[i].category;
+			if(c == "Expertises") resume[c] = docs[i].contents;
+			else resume[c] = docs[i].detail;
+		}
+		jade.renderFile(__dirname + '/jade/resume.jade',{cat:cates, rsm:resume}
+			, function(err, html){
+			if(err) console.log(err);
+			res.send(html);
+		});
+	}); 
+}); 
 	
 app.listen(80);
 console.log('Server starts.');
