@@ -7,7 +7,7 @@ html#ng-app(lang="zh-cn",xmlns:ng="http://angularjs.org",ng-app='ngApp')
 		include head
 		script(src='/ng/resume.js')
 		style(type='text/css')
-			|#mainBody{margin-top:38px; max-width:760px}
+			|.mainBody{margin-top:38px;}
 			|.resume-items{margin-left:20px}
 			|.resume-item > li{margin-bottom:35px}
 			|.row-padding{padding-left:10px}
@@ -37,7 +37,7 @@ html#ng-app(lang="zh-cn",xmlns:ng="http://angularjs.org",ng-app='ngApp')
 										if(d)
 											li= d								
 					
-				.col-sm-9#mainBody
+				.col-sm-6.mainBody
 					h2 Shuo Liu
 					each c in cat
 						.category

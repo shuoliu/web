@@ -1,4 +1,4 @@
-angular.module('ngApp',['ngCookies']);
+ngApp = angular.module('ngApp',['ngCookies','ngRoute']);
 
 function ctrlMain($scope, $http, $cookies) {
 	var LANG = 'en';
@@ -14,7 +14,6 @@ function ctrlMain($scope, $http, $cookies) {
       $scope.body.text=data[0];
     });
 	//cookie behaviour
-	console.log($cookies.username);
 	if($cookies.username) {
 		$scope.body.User.username = $cookies.username;
 		$scope.body.isLogin = true;
@@ -43,12 +42,14 @@ function ctrlMain($scope, $http, $cookies) {
 	};
 }
 
+isValid = function(v){
+	//if(Object.prototype.toString.apply(v)!=='[object Object]')return false;
+	for(var p in v) if(v[p]) return false;
+	return true;
+};
+
 function ctrlLogin($scope, $http, $location, $cookies, $timeout) {
-	var isValid = function(v){
-		//if(Object.prototype.toString.apply(v)!=='[object Object]')return false;
-		for(var p in v) if(v[p]) return false;
-		return true;
-	};
+	
 	$scope.close = function(){
 		$scope.body.pressLogin=false;
 		$scope.user = {};
@@ -58,8 +59,6 @@ function ctrlLogin($scope, $http, $location, $cookies, $timeout) {
 	$scope.user = {};
 
 	$scope.login = function(){
-		if(!isValid($scope.fmLogin.username.$error) 
-			|| !isValid($scope.fmLogin.password.$error)) return;
 		console.log($scope.user.username + "begin to log");
 		$http.post('/login', $scope.user)
 			.success(function(data){

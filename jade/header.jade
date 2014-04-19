@@ -9,7 +9,7 @@
 				li
 					a.text-black(href='/resume') {{body.text.h_resume}}
 				li
-					a.text-black(href='#') {{body.text.h_tools}}
+					a.text-black(href='/tools') {{body.text.h_tools}}
 				li
 					a.text-black(href='#') {{body.text.h_news}}
 			a.navbar-toggle.text-black.emerge(data-toggle='dropdown', data-target='#', href)
@@ -40,4 +40,4 @@
 					label {{body.text.l_password}}
 					input.form-control(name='password',type='password',ng-model='user.password',ng-minlength='4',ng-maxlength='20',required)
 					span.help-block {{body.text.l_help}}
-					button.btn.btn-primary.pull-right(ng-click='login()') {{body.text.l_login}}
+					button.btn.btn-primary.pull-right(ng-click='login()',ng-disabled="fmLogin.$invalid") {{body.text.l_login}}

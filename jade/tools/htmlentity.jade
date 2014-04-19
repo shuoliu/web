@@ -1,0 +1,14 @@
+form(name='htmlentity')
+	.form-group
+		label Unicode Text:
+		textarea.form-control(ng-model='html',rows='8',placeholder='\<\>')
+	
+	.form-group(style='margin-top:10px')
+		label HTML Entities:
+		textarea.form-control(ng-model='entity',rows='8',placeholder='&#60;&#62;')
+	p.help-block For a whole list of HTML entities, please refer to 
+		a(href='http://www.w3schools.com/html/html_entities.asp') w3schools
+		|  and 
+		a(href='http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references') Wikipedia
+		| .
+		

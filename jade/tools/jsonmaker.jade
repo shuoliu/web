@@ -1,0 +1,15 @@
+form(name='jsonmaker')
+	.form-group
+		label Put field names for JSON file, delimited by SPACE:
+		input.form-control(ng-model='table.cols', placeholder='r1  r2  r3', required)
+	.form-group
+		label Put contents by rows, each row should delimits values by SPACE:
+		textarea.form-control(ng-model='table.rows',rows='10',placeholder="v1  v2  v3", required)
+	p.help-block JSON Maker interpreters row-based data into JSON style object array.
+	p.help-block Eg. Column names: r1 r2, rows: a b; c; d e f
+	p.help-block &rarr; [{"r1":"a","r2":"b"},{"r1":"c"},{"r1":"d","r2":"e","r2":"f"}]
+	button.btn.btn-primary(ng-click='makejson()',ng-disabled="jsonmaker.$invalid") Make it!
+	
+br
+.from-group.well
+	p {{json_output}}

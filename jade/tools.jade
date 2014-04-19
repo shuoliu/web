@@ -1,0 +1,21 @@
+doctype html
+html#ng-app(lang="zh-cn",xmlns:ng="http://angularjs.org",ng-app='ngApp')
+	head
+		title Tools - Welcome to Shuo's site
+		include head
+		script(src='ng/tools.js')
+		style(type='text/css')
+	body(ng-controller='ctrlMain')
+		include header
+		.container
+			.row
+				.col-sm-3
+					.affix.sidebar
+						- var prefix = '#/'
+						- var tools = {"htmlentity":"HTML Entity Converter","jsonmaker":"JSON Maker"}
+						ul.nav.sidebar-nav
+							each entry, index in tools
+								li
+									a(href=prefix+index)= entry
+				.col-sm-8
+					.mainBody(ng-view)
