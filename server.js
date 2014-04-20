@@ -46,8 +46,11 @@ app.get('/resume', function(req, res){
 		}
 		jade.renderFile(__dirname + '/jade/resume.jade',{cat:cates, rsm:resume}
 			, function(err, html){
-			if(err) console.log(err);
-			res.send(html);
+			if(err) {
+				console.log(err);
+				res.send(err);
+			} 
+			else res.send(html);
 		});
 	}); 
 }); 
@@ -81,6 +84,86 @@ app.post('/tools/jsonmaker', function(req, res){
 		if (code !== 0) {  return res.send(500, code); console.log(output);}
 		res.send(200, output);
 	});
+});
+
+app.get('/news/twitter', function(req, res) {
+	var Twitter = require('./util/twitter.js').Twitter;
+	var twitter = new Twitter();
+	
+	function getTweetsForTrend(trends, count, limit, retset) {	
+		var params = {q:trends[count].query
+					,lang:"en"
+					,result_type:"popular"
+					,count:"5"};
+		var topic = {};
+		topic.url = trends[count].url;
+		var query = trends[count].query;
+		topic.topic = query.replace(/[\"\+]/g, ' ');
+		twitter.getTweets(params, function(err, response, body){
+				console.log(err);
+			}, function(rawdata){
+				var data = JSON.parse(rawdata);
+				var entity = [];
+				for(var i = 0; i < 5; i ++) {
+					entity[i] = {};
+					var msg = data.statuses[i];
+					if(!msg) break;
+					if(msg.text)
+						entity[i].text = msg.text;
+					if(msg.entities && msg.entities.media) {
+						entity[i].media = [];
+						var media = msg.entities.media;
+						for(var m in media)
+							entity[i].media.push(media[m].media_url);
+					}
+					if(msg.user && msg.user.screen_name)
+						entity[i].user = msg.user.screen_name;
+					if(msg.user && msg.user.url)
+						entity[i].userpage = msg.user.url;
+					// console.log("entity:");
+					// console.log(entity[i]);
+				}
+				topic.entities = entity;
+				retset[count] = topic;
+				if(count == limit) {
+					res.send(retset);
+				} else {
+					getTweetsForTrend(trends, count + 1, limit, retset);
+				}
+			});
+	}
+	
+	function getTrendsSuccess(rawdata) {
+		// 
+		var data = JSON.parse(rawdata);
+		var trends = data[0].trends;
+		var topics = [];
+		for(var v in trends) {
+			var topic = {};
+			var str = unescape(trends[v].query);
+			topic.query = str;
+			topic.url = trends[v].url;
+			topics.push(topic);
+		}
+		// res.send(topics);
+		getTweetsForTrend(topics, 0, 9, []);
+	};
+	
+	var trendPara = {
+		id:"23424977"	// the US
+		,exclude:"hashtags" // remove #
+	};
+	
+	twitter.getTrends(trendPara, function(err, response, body){
+			console.log(err);
+		}, getTrendsSuccess);
+	// var news = jade.renderFile(__dirname + '/jade/news', {});
+	// res.send(news);
+});
+
+app.get('/news', function(req, res){
+	var news = jade.renderFile(__dirname + '/jade/news.jade',{});
+	res.send(news);
 });
 	
 app.listen(80);
