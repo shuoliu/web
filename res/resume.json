@@ -12,4 +12,4 @@
 {"starts":"2013/03","ends":"2013/05","company":"SUNY, Buffalo, NY","title":"Symmetric Group Messenger","techs":"Android","desc":["Implemented an instant group messenger on Android","Implemented a vector-clock algorithm in order to preserve total ordering on messages."]},
 {"starts":"2010/11","ends":"2011/08","company":"Shaanxi Normal University, China","title":"3D Campus Navigation System","techs":"JavaScript, OpenGL, VRML","desc":["A 3D virtual campus model with real-time interaction enhancement;","Was the leader of a 5-member team;","Implemented the key function of interaction in VRML world and the work has been published."]}]},
 
-{"category":"Expertises","contents":["JAVA, C/C++, JavaScript, Python","HTML5, Node.js, PHP, JQuery, AngularJS, CSS, Bootstrap","MySql, SQL Server, MongoDB","Linux(CentOS, Red Hat, Ubuntu), Windows, MacOS, Android","OOD/OOP, Git"]}]
+{"category":"Expertises","contents":["JAVA, C/C++, JavaScript, Python","HTML5, Node.js, PHP, JQuery, AngularJS, CSS, Bootstrap","MySql, SQL Server, MongoDB","Linux(CentOS, Red Hat, Ubuntu), Amazon EC2, Windows, MacOS, Android","OOD/OOP, Git"]}]
