@@ -21,30 +21,36 @@ html#ng-app(lang="zh-cn",xmlns:ng="http://angularjs.org",ng-app='ngApp')
 							each c in cat
 								li
 									a(href ng-click="scrollTo('#{c}')")= c
-				mixin detail(content)
-					ul.dull-list.resume-item
-						each c in content
+							li(style="border-width:3px 0 0 0;border-style:solid;border-color:#e6e6e6")
 							li
-								h4= c.title
-								label= c.company
-								span.row-padding #{c.starts} - #{c.ends}
-								if(c.techs)
-									h5 TECHS: #{c.techs}
-								ul
-									each d in c.desc
-										if(d)
-											li= d								
-					
-				.col-sm-6.mainBody
+								input.form-control(ng-model='search',style="margin-top:10px",placeholder="search")
+							li
+								a(href onClick='window.print()') Print Resume
+				mixin detail(category)
+					ul.dull-list.resume-item#category 
+						li(ng-repeat='c in resume["#{category}"]|filter:search')
+							h4 {{c.title}} 
+							label {{c.company}} 
+							span.row-padding {{c.starts}} - {{c.ends}}
+							h5(ng-show='c.techs') TECHS: {{c.techs}}
+							ul
+								li(ng-show='c.desc',ng-repeat="d in c.desc") {{d}}
+								
+				.col-sm-8.col-md-7.mainBody
 					h2 Shuo Liu
+					address
+						|669 Spruce Drive, <br />
+						|Sunnyvale, CA 94086 <br />
+						|Website: <a href="http://www.liushuo.com">http://www.liushuo.com </a><br />
+						|Phone: (716)262-5833 <br />
+						|E-mail: shuoliu.us@gmail.com <br />
 					each c in cat
 						.category
 							.anchor(id=c)
 							h3= c
 							if(c == 'Expertises')
 								ul
-									each i in rsm[c]
-										li= i
+									li(ng-repeat="i in resume.Expertises | filter:search") {{i}}
 							else
 								.resume-items
-									+detail(rsm[c])
+									+detail(c)

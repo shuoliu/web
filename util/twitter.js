@@ -21,7 +21,6 @@ function Twitter() {
 
 Twitter.prototype.doRequest = function (url, error, success) {
     this.oauth.get(url, this.accessToken, this.accessTokenSecret, function (err, body, response) {
-        console.log('URL [%s]', url);
         if (!err && response.statusCode == 200) {
             success(body);
         } else {

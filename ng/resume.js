@@ -3,4 +3,8 @@ function ctrlResume($scope, $http, $anchorScroll, $location) {
 		$location.hash(id);
 		$anchorScroll();
 	};
+	$scope.resume = {};
+	$http.get('/resume/detail').success(function(data){
+		$scope.resume = data;
+	});
 }

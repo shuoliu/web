@@ -1,8 +1,8 @@
 import sys
 
-def record(cols, row):
+def record(cols, row, delimiter):
     lenth = len(cols)
-    cont = row.split()
+    cont = row.split(delimiter)
     ret = "{"
     ret += '"' + cols[0] + '"' + ':'
     ret += '"' + cont[0] + '"'
@@ -17,13 +17,13 @@ def record(cols, row):
     ret += '}'
     return ret
 
-def makejson(cols, content):
+def makejson(cols, content, delimiter):
     ret = "["
     rows = content.splitlines()
-    ret += record(cols, rows[0])
+    ret += record(cols, rows[0], delimiter)
     for line in rows[1:]:
         ret += ','
-        ret += record(cols, line)
+        ret += record(cols, line, delimiter)
     ret += "]"
     return ret
 
@@ -38,7 +38,7 @@ def runtest():
 
 def run():
     cols = sys.argv[1].split()
-    return makejson(cols, sys.argv[2])
+    return makejson(cols, sys.argv[2], sys.argv[3])
     #print sys.argv[1] + ' ' + sys.argv[2]
 
 #runtest()

@@ -34,25 +34,41 @@ app.get('/logout', function(req, res){
 });
 
 app.get('/resume', function(req, res){
-	var resumeDB = require('./util/db_resume.js')
-	resumeDB.sendResume(function(docs){
+	var cates = ["Education", "Expertises", "Professional Experiences", "Projects"];
+	jade.renderFile(__dirname + '/jade/resume.jade',{cat:cates}
+		, function(err, html){
+		if(err) {
+			console.log(err);
+			res.send(html);
+		} 
+		else res.send(html);
+	});
+});
+
+app.get('/resume/detail', function(req, res){
+	var send = function(docs){
 		//to keep in this order
 		var cates = ["Education", "Expertises", "Professional Experiences", "Projects"];
-		var resume = {"test":"test1","Education":"", "Expertises":"", "Professional Experiences":"", "Projects":""};
+		var resume = {};
 		for(var i = 0; i < docs.length; i ++) {
 			var c = docs[i].category;
 			if(c == "Expertises") resume[c] = docs[i].contents;
 			else resume[c] = docs[i].detail;
 		}
-		jade.renderFile(__dirname + '/jade/resume.jade',{cat:cates, rsm:resume}
-			, function(err, html){
-			if(err) {
-				console.log(err);
-				res.send(err);
-			} 
-			else res.send(html);
-		});
-	}); 
+		// jade.renderFile(__dirname + '/jade/resume.jade',{cat:cates, rsm:resume}
+			// , function(err, html){
+			// if(err) {
+				// console.log(err);
+				// res.send(html);
+			// } 
+			// else res.send(html);
+		// });
+		res.send(resume);
+	}
+	// var resumeDB = require('./util/db_resume.js')
+	// resumeDB.sendResume(send); 
+	var resume = require('./res/resume');
+	send(resume);
 }); 
 
 app.get('/tools', function(req, res){
@@ -71,12 +87,13 @@ app.get('/tools/jsonmaker', function(req, res){
 	res.send(tools);
 });
 
-app.post('/tools/jsonmaker', function(req, res){
+app.post('/tools/jsonmaker', function(req, res){ 
 	var python = require('child_process').spawn(
 	'python',
 		[__dirname + "/util/makejson.py"
 		, req.body.cols
-		, req.body.rows]
+		, req.body.rows
+		, req.body.delimiter || ' ']
 	);
 	var output = "";
 	python.stdout.on('data', function(data){ output += data });
@@ -165,6 +182,6 @@ app.get('/news', function(req, res){
 	var news = jade.renderFile(__dirname + '/jade/news.jade',{});
 	res.send(news);
 });
-	
+
 app.listen(80);
 console.log('Server starts.');

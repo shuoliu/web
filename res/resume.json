@@ -1,0 +1,15 @@
+[{"category":"Education","detail":[
+{"starts":"2012/08","ends":"2014/02","company":"State University of New York, Buffalo","title":"M.S. in Computer Science & Engineering","techs":"Distributed Systems, Parallel Processing, Algorithm, Big Data, Pattern Recognition, Multimedia Systems, VLSI, Computer Security","desc":[]},
+{"starts":"2007/09","ends":"2012/07","company":"Shaanxi Normal University, China","title":"B.E. in Software Engineering","techs":"Operating Systems, Computer Networks, Databases, Algorithm, Data Structure, Computer Organization, Network Engineering, Compiling Principles, Software Projects Management, Software Engineering","desc":[]}]},
+
+{"category":"Professional Experiences","detail":[
+{"starts":"2011/07","ends":"2012/05","company":"ZED-3 Tech Inc. China","title":"Software Engineering Intern","techs":"C++, Linux(Red Hat)","desc":["Implemented user requirements on 4 projects with C++","Wrote a SDK for third party developers, and wrote the documents","Agile development, test and debug."]},
+{"starts":"2011/06","ends":"2012/06","company":"Shaanxi Normal University, China","title":"Research Assistant","techs":"JAVA, Lucence","desc":["Research on MOOC at Ubiquitous Computing Lab, under supervision of Prof Zhenqiang Wu","Built SNNU Virtual Class with open source software","Was in charge of the search engine module team, designed the module","Implemented the search engine with Apache Lucene and Heritrix."]}]},
+
+{"category":"Projects","detail":[
+{"starts":"2013/11","ends":"2014/02","company":"Dr. Hyde Dental Clinic, Buffalo, NY","title":"Website Development","techs":"LAMP, WordPress, CSS","desc":["Built a website for Dr. Hyde dental clinic. Website address: http://4adentist.com","Visual design and content management."]},
+{"starts":"2012/10","ends":"2013/02","company":"SUNY, Bufalo, NY","title":"High Performance Computing","techs":"C, Python, JAVA, Matlab","desc":["Parallel computing research under supervision of Prof. Jae-Hun Jung","Implemented vascular simulation program with Matlab, parallelied with MPI and CUDA","CUDA program speeds up by 30 times, making it possible for medical practice."]},
+{"starts":"2013/03","ends":"2013/05","company":"SUNY, Buffalo, NY","title":"Symmetric Group Messenger","techs":"Android","desc":["Implemented an instant group messenger on Android","Implemented a vector-clock algorithm in order to preserve total ordering on messages."]},
+{"starts":"2010/11","ends":"2011/08","company":"Shaanxi Normal University, China","title":"3D Campus Navigation System","techs":"JavaScript, OpenGL, VRML","desc":["A 3D virtual campus model with real-time interaction enhancement;","Was the leader of a 5-member team;","Implemented the key function of interaction in VRML world and the work has been published."]}]},
+
+{"category":"Expertises","contents":["JAVA, C/C++, JavaScript, Python","HTML5, Node.js, PHP, JQuery, AngularJS, CSS, Bootstrap","MySql, SQL Server, MongoDB","Linux(CentOS, Red Hat, Ubuntu), Windows, MacOS, Android","OOD/OOP, Git"]}]
