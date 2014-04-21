@@ -2,5 +2,6 @@
 {"framework":"MongoDB","version":"2.6"},
 {"framework":"node.js","version":"0.10.26"},
 {"framework":"Bootstrap", "version":"3.0.3"},
-{"framework":"JQuery", "version":"1.11.0"}
+{"framework":"JQuery", "version":"1.11.0"},
+{"framework":"Python", "version":"2.7.3"}
 ]

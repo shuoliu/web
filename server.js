@@ -3,6 +3,10 @@ var http = require('http')
 	, express = require('express')
 	, app = express()
 	, authen = require('./util/authen.js');
+//express middlewares
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var bodyParser = require('body-parser');
 
 app.routeTable = {};
 	
@@ -13,12 +17,12 @@ app.use('/js', express.static(__dirname+'/js'));
 app.use('/res', express.static(__dirname+'/res'));
 app.use('/fonts', express.static(__dirname+'/fonts'));
 
-app.configure(function(){
-	app.use(express.json());
-	app.use(express.urlencoded());
-	app.use(express.cookieParser());
-	app.use(express.session({secret:"zuohen",cookie:{secure:true,maxAge:3600000}}));
-});
+//app.configure(function(){
+	// app.use(express.json());
+	app.use(bodyParser());
+	app.use(cookieParser());
+	app.use(session({secret:"zuohen",cookie:{secure:true,maxAge:3600000}}));
+//});
 
 app.get('/', function(req, res) {
 	var home = jade.renderFile(__dirname + '/jade/index.jade',{});
